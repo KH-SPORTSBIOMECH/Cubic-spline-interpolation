@@ -7,8 +7,27 @@
 この手法の問題点としては、時間の情報が無くなるという点が挙げられる。
 接地時間（秒）が大きく異なる場合や、左右脚の比較をする場合に、時間を規格化し平均値化したデータを観察することは注意すべきである。
 
+> **Matlab**
+``` Matlab
+function [y2] = Spline(PARAM, NUM)
+    x = 1:size(PARAM,1);
+    y = PARAM;    
 
-## Python
+    head = x(1);
+    tail = x(1,size(PARAM,1));
+    
+    %Cubic-Spline
+    c_spline = spline(x, y);      
+    y2 = ppval(c_spline, linspace(head,tail,NUM).');
+end
+```
+
+`PARAM`はスプライン補間したいひとつの変数の時系列データです。
+
+`NUM`はスプライン補間のデータ数です。
+
+
+> **Python**
 ``` python
 import pandas as pd
 import numpy as np
